@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Slipper Therapy</title>
+<style>
+  :root { --ink: #2a2118; --muted: #6d6152; --accent: #d9482f; --bg: #fbf7f0; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 18px 56px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  h1 { font-size: 26px; margin: 0; color: var(--accent); }
+  h2 { font-size: 19px; margin: 28px 0 8px; }
+  .date { color: var(--muted); font-style: italic; margin: 6px 0 18px; }
+  select { font: inherit; padding: 6px 10px; border-radius: 10px; border: 1px solid #d6cbb8; background: #fff; color: var(--ink); }
+  a { color: var(--accent); }
+  ul { padding-inline-start: 22px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 id="t-title"></h1>
+    <select id="lang" aria-label="Language"></select>
+  </header>
+  <p class="date" id="t-date"></p>
+  <div id="content"></div>
+</main>
+<script>
+const L = {
+ "en": {
+  "name": "English",
+  "title": "Privacy Policy — Slipper Therapy",
+  "date": "Last updated: November 7, 2026",
+  "intro": "This privacy policy applies to the <b>Slipper Therapy</b> mobile app (the \"App\"), developed and published by <b>Studio Ekin</b> (\"we\", \"us\"). By using the App, you agree to the practices described in this policy.",
+  "h_collect": "Information We Collect",
+  "collect": "We do not collect, store, or share any personal information directly. The App does not require registration and does not ask for your name, email address, or any other personal details.",
+  "h_ads": "Third-Party Services: Advertising",
+  "ads": "The App shows advertisements served by <b>Google AdMob</b>, a service provided by Google. AdMob may automatically collect and use certain data, including:",
+  "items": [
+   "Device identifiers (such as the Advertising ID)",
+   "IP address and approximate location",
+   "Device information (model, operating system version)",
+   "Ad interaction data (views, clicks)"
+  ],
+  "ads_use": "Google uses this data to show and measure advertisements. Learn more: <a href=\"https://policies.google.com/privacy\">Google Privacy Policy</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">How Google uses data from partner apps</a>.",
+  "consent": "In the European Economic Area, the United Kingdom, Switzerland and other regions where the law requires it, the App asks for your consent through Google's consent form before showing personalized ads. You can change your choice at any time with the \"Privacy settings\" button on the App's main menu.",
+  "optout": "You can also turn off personalized ads on your device: on Android, Settings → Google → Ads; on iOS, Settings → Privacy & Security → Tracking.",
+  "h_local": "Data Stored on Your Device",
+  "local": "Your language choice, sound setting, level progress, stars and score are stored only on your device. They are never sent to us or to any server, and they are deleted when you uninstall the App.",
+  "h_children": "Children's Privacy",
+  "children": "The App is not directed at children under 13, and we do not knowingly collect personal information from children. Ads are served in line with Google AdMob policies. If you believe a child has provided personal information through the App, contact us and we will take appropriate action.",
+  "h_changes": "Changes to This Policy",
+  "changes": "We may update this privacy policy from time to time. Changes will be posted on this page with a new revision date.",
+  "h_contact": "Contact Us",
+  "contact": "If you have questions about this privacy policy, contact us at: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "tr": {
+  "name": "Türkçe",
+  "title": "Gizlilik Politikası — Slipper Therapy",
+  "date": "Son güncelleme: 7 Kasım 2026",
+  "intro": "Bu gizlilik politikası, <b>Studio Ekin</b> (\"biz\") tarafından geliştirilen ve yayınlanan <b>Slipper Therapy</b> mobil uygulaması (\"Uygulama\") için geçerlidir. Uygulamayı kullanarak bu politikada açıklanan uygulamaları kabul etmiş olursunuz.",
+  "h_collect": "Topladığımız Bilgiler",
+  "collect": "Doğrudan hiçbir kişisel bilgi toplamıyor, saklamıyor veya paylaşmıyoruz. Uygulama kayıt gerektirmez; adınızı, e-posta adresinizi veya başka bir kişisel bilginizi istemez.",
+  "h_ads": "Üçüncü Taraf Hizmetleri: Reklam",
+  "ads": "Uygulama, Google'ın bir hizmeti olan <b>Google AdMob</b> tarafından sunulan reklamlar gösterir. AdMob bazı verileri otomatik olarak toplayıp kullanabilir:",
+  "items": [
+   "Cihaz kimlikleri (Reklam Kimliği gibi)",
+   "IP adresi ve yaklaşık konum",
+   "Cihaz bilgileri (model, işletim sistemi sürümü)",
+   "Reklam etkileşim verileri (görüntüleme, tıklama)"
+  ],
+  "ads_use": "Google bu verileri reklam göstermek ve ölçmek için kullanır. Daha fazla bilgi: <a href=\"https://policies.google.com/privacy\">Google Gizlilik Politikası</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Google'ın iş ortağı uygulamalardan gelen verileri nasıl kullandığı</a>.",
+  "consent": "Avrupa Ekonomik Alanı, Birleşik Krallık, İsviçre ve yasanın gerektirdiği diğer bölgelerde Uygulama, kişiselleştirilmiş reklam göstermeden önce Google'ın izin formu ile onayınızı ister. Tercihinizi istediğiniz zaman Uygulamanın ana menüsündeki \"Gizlilik ayarları\" düğmesiyle değiştirebilirsiniz.",
+  "optout": "Kişiselleştirilmiş reklamları cihazınızdan da kapatabilirsiniz: Android'de Ayarlar → Google → Reklamlar; iOS'ta Ayarlar → Gizlilik ve Güvenlik → İzleme.",
+  "h_local": "Cihazınızda Saklanan Veriler",
+  "local": "Dil tercihiniz, ses ayarınız, bölüm ilerlemeniz, yıldızlarınız ve puanınız yalnızca cihazınızda saklanır. Bize veya herhangi bir sunucuya asla gönderilmez ve Uygulamayı kaldırdığınızda silinir.",
+  "h_children": "Çocukların Gizliliği",
+  "children": "Uygulama 13 yaşın altındaki çocuklara yönelik değildir ve çocuklardan bilerek kişisel bilgi toplamayız. Reklamlar Google AdMob politikalarına uygun şekilde sunulur. Bir çocuğun Uygulama üzerinden kişisel bilgi verdiğini düşünüyorsanız bizimle iletişime geçin, gerekli önlemleri alırız.",
+  "h_changes": "Bu Politikadaki Değişiklikler",
+  "changes": "Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Değişiklikler bu sayfada yeni tarihle yayınlanır.",
+  "h_contact": "Bize Ulaşın",
+  "contact": "Bu gizlilik politikasıyla ilgili sorularınız için: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "de": {
+  "name": "Deutsch",
+  "title": "Datenschutzerklärung — Slipper Therapy",
+  "date": "Zuletzt aktualisiert: 7. November 2026",
+  "intro": "Diese Datenschutzerklärung gilt für die mobile App <b>Slipper Therapy</b> (die „App“), entwickelt und veröffentlicht von <b>Studio Ekin</b> („wir“). Durch die Nutzung der App stimmen Sie den hier beschriebenen Praktiken zu.",
+  "h_collect": "Welche Daten wir erheben",
+  "collect": "Wir erheben, speichern oder teilen direkt keine personenbezogenen Daten. Die App erfordert keine Registrierung und fragt weder nach Ihrem Namen noch nach Ihrer E-Mail-Adresse oder anderen persönlichen Angaben.",
+  "h_ads": "Dienste Dritter: Werbung",
+  "ads": "Die App zeigt Werbung von <b>Google AdMob</b>, einem Dienst von Google. AdMob kann automatisch bestimmte Daten erheben und nutzen, darunter:",
+  "items": [
+   "Gerätekennungen (z. B. die Werbe-ID)",
+   "IP-Adresse und ungefährer Standort",
+   "Geräteinformationen (Modell, Betriebssystemversion)",
+   "Daten zur Interaktion mit Anzeigen (Aufrufe, Klicks)"
+  ],
+  "ads_use": "Google nutzt diese Daten, um Anzeigen auszuliefern und zu messen. Mehr dazu: <a href=\"https://policies.google.com/privacy\">Datenschutzerklärung von Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Wie Google Daten aus Partner-Apps verwendet</a>.",
+  "consent": "Im Europäischen Wirtschaftsraum, im Vereinigten Königreich, in der Schweiz und in anderen Regionen, in denen das Gesetz es verlangt, bittet die App vor personalisierter Werbung über das Einwilligungsformular von Google um Ihre Zustimmung. Sie können Ihre Wahl jederzeit über die Schaltfläche „Datenschutzeinstellungen“ im Hauptmenü der App ändern.",
+  "optout": "Personalisierte Werbung können Sie auch auf Ihrem Gerät deaktivieren: unter Android in Einstellungen → Google → Anzeigen, unter iOS in Einstellungen → Datenschutz & Sicherheit → Tracking.",
+  "h_local": "Auf Ihrem Gerät gespeicherte Daten",
+  "local": "Ihre Sprachauswahl, Toneinstellung, Ihr Levelfortschritt, Ihre Sterne und Punkte werden nur auf Ihrem Gerät gespeichert. Sie werden nie an uns oder einen Server gesendet und beim Deinstallieren der App gelöscht.",
+  "h_children": "Datenschutz von Kindern",
+  "children": "Die App richtet sich nicht an Kinder unter 13 Jahren, und wir erheben wissentlich keine personenbezogenen Daten von Kindern. Anzeigen werden gemäß den Richtlinien von Google AdMob ausgeliefert. Wenn Sie glauben, dass ein Kind über die App personenbezogene Daten angegeben hat, kontaktieren Sie uns, und wir ergreifen geeignete Maßnahmen.",
+  "h_changes": "Änderungen dieser Erklärung",
+  "changes": "Wir können diese Datenschutzerklärung gelegentlich aktualisieren. Änderungen werden auf dieser Seite mit neuem Datum veröffentlicht.",
+  "h_contact": "Kontakt",
+  "contact": "Bei Fragen zu dieser Datenschutzerklärung erreichen Sie uns unter: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "fr": {
+  "name": "Français",
+  "title": "Politique de confidentialité — Slipper Therapy",
+  "date": "Dernière mise à jour : 7 novembre 2026",
+  "intro": "Cette politique de confidentialité s'applique à l'application mobile <b>Slipper Therapy</b> (l'« Application »), développée et publiée par <b>Studio Ekin</b> (« nous »). En utilisant l'Application, vous acceptez les pratiques décrites dans cette politique.",
+  "h_collect": "Informations que nous collectons",
+  "collect": "Nous ne collectons, ne stockons et ne partageons directement aucune information personnelle. L'Application ne nécessite aucune inscription et ne demande ni votre nom, ni votre adresse e-mail, ni aucune autre donnée personnelle.",
+  "h_ads": "Services tiers : publicité",
+  "ads": "L'Application affiche des publicités fournies par <b>Google AdMob</b>, un service de Google. AdMob peut collecter et utiliser automatiquement certaines données, notamment :",
+  "items": [
+   "Identifiants de l'appareil (comme l'identifiant publicitaire)",
+   "Adresse IP et localisation approximative",
+   "Informations sur l'appareil (modèle, version du système)",
+   "Données d'interaction avec les annonces (vues, clics)"
+  ],
+  "ads_use": "Google utilise ces données pour afficher et mesurer les publicités. En savoir plus : <a href=\"https://policies.google.com/privacy\">Règles de confidentialité de Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Comment Google utilise les données des applications partenaires</a>.",
+  "consent": "Dans l'Espace économique européen, au Royaume-Uni, en Suisse et dans les autres régions où la loi l'exige, l'Application vous demande votre consentement via le formulaire de Google avant d'afficher des annonces personnalisées. Vous pouvez modifier votre choix à tout moment avec le bouton « Paramètres de confidentialité » du menu principal.",
+  "optout": "Vous pouvez aussi désactiver les annonces personnalisées sur votre appareil : sur Android, Paramètres → Google → Annonces ; sur iOS, Réglages → Confidentialité et sécurité → Suivi.",
+  "h_local": "Données stockées sur votre appareil",
+  "local": "Votre choix de langue, le réglage du son, votre progression, vos étoiles et votre score sont stockés uniquement sur votre appareil. Ils ne sont jamais envoyés à nous ni à aucun serveur et sont supprimés lorsque vous désinstallez l'Application.",
+  "h_children": "Confidentialité des enfants",
+  "children": "L'Application ne s'adresse pas aux enfants de moins de 13 ans et nous ne collectons pas sciemment d'informations personnelles auprès d'enfants. Les annonces sont diffusées conformément aux règles de Google AdMob. Si vous pensez qu'un enfant a fourni des informations personnelles via l'Application, contactez-nous et nous prendrons les mesures appropriées.",
+  "h_changes": "Modifications de cette politique",
+  "changes": "Nous pouvons mettre à jour cette politique de temps à autre. Les modifications seront publiées sur cette page avec une nouvelle date.",
+  "h_contact": "Nous contacter",
+  "contact": "Pour toute question concernant cette politique : <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "es": {
+  "name": "Español",
+  "title": "Política de privacidad — Slipper Therapy",
+  "date": "Última actualización: 7 de noviembre de 2026",
+  "intro": "Esta política de privacidad se aplica a la aplicación móvil <b>Slipper Therapy</b> (la \"Aplicación\"), desarrollada y publicada por <b>Studio Ekin</b> (\"nosotros\"). Al usar la Aplicación, aceptas las prácticas descritas en esta política.",
+  "h_collect": "Información que recopilamos",
+  "collect": "No recopilamos, almacenamos ni compartimos directamente ninguna información personal. La Aplicación no requiere registro y no pide tu nombre, correo electrónico ni ningún otro dato personal.",
+  "h_ads": "Servicios de terceros: publicidad",
+  "ads": "La Aplicación muestra anuncios de <b>Google AdMob</b>, un servicio de Google. AdMob puede recopilar y usar automáticamente ciertos datos, entre ellos:",
+  "items": [
+   "Identificadores del dispositivo (como el ID de publicidad)",
+   "Dirección IP y ubicación aproximada",
+   "Información del dispositivo (modelo, versión del sistema)",
+   "Datos de interacción con anuncios (vistas, clics)"
+  ],
+  "ads_use": "Google usa estos datos para mostrar y medir anuncios. Más información: <a href=\"https://policies.google.com/privacy\">Política de privacidad de Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Cómo usa Google los datos de las aplicaciones asociadas</a>.",
+  "consent": "En el Espacio Económico Europeo, el Reino Unido, Suiza y otras regiones donde la ley lo exige, la Aplicación pide tu consentimiento mediante el formulario de Google antes de mostrar anuncios personalizados. Puedes cambiar tu elección en cualquier momento con el botón \"Ajustes de privacidad\" del menú principal.",
+  "optout": "También puedes desactivar los anuncios personalizados en tu dispositivo: en Android, Ajustes → Google → Anuncios; en iOS, Ajustes → Privacidad y seguridad → Rastreo.",
+  "h_local": "Datos guardados en tu dispositivo",
+  "local": "Tu elección de idioma, el ajuste de sonido, tu progreso, tus estrellas y tu puntuación se guardan solo en tu dispositivo. Nunca se envían a nosotros ni a ningún servidor y se eliminan al desinstalar la Aplicación.",
+  "h_children": "Privacidad de los niños",
+  "children": "La Aplicación no está dirigida a menores de 13 años y no recopilamos a sabiendas información personal de niños. Los anuncios se sirven conforme a las políticas de Google AdMob. Si crees que un niño ha facilitado información personal a través de la Aplicación, contáctanos y tomaremos las medidas oportunas.",
+  "h_changes": "Cambios en esta política",
+  "changes": "Podemos actualizar esta política de privacidad ocasionalmente. Los cambios se publicarán en esta página con una nueva fecha.",
+  "h_contact": "Contacto",
+  "contact": "Si tienes preguntas sobre esta política de privacidad, escríbenos a: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "it": {
+  "name": "Italiano",
+  "title": "Informativa sulla privacy — Slipper Therapy",
+  "date": "Ultimo aggiornamento: 7 novembre 2026",
+  "intro": "La presente informativa si applica all'app mobile <b>Slipper Therapy</b> (l'\"App\"), sviluppata e pubblicata da <b>Studio Ekin</b> (\"noi\"). Usando l'App accetti le pratiche descritte in questa informativa.",
+  "h_collect": "Informazioni che raccogliamo",
+  "collect": "Non raccogliamo, conserviamo né condividiamo direttamente alcuna informazione personale. L'App non richiede registrazione e non chiede il tuo nome, indirizzo e-mail o altri dati personali.",
+  "h_ads": "Servizi di terze parti: pubblicità",
+  "ads": "L'App mostra annunci forniti da <b>Google AdMob</b>, un servizio di Google. AdMob può raccogliere e utilizzare automaticamente alcuni dati, tra cui:",
+  "items": [
+   "Identificatori del dispositivo (come l'ID pubblicità)",
+   "Indirizzo IP e posizione approssimativa",
+   "Informazioni sul dispositivo (modello, versione del sistema)",
+   "Dati di interazione con gli annunci (visualizzazioni, clic)"
+  ],
+  "ads_use": "Google usa questi dati per mostrare e misurare gli annunci. Maggiori informazioni: <a href=\"https://policies.google.com/privacy\">Norme sulla privacy di Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Come Google utilizza i dati delle app partner</a>.",
+  "consent": "Nello Spazio economico europeo, nel Regno Unito, in Svizzera e nelle altre regioni in cui la legge lo richiede, l'App chiede il tuo consenso tramite il modulo di Google prima di mostrare annunci personalizzati. Puoi cambiare la tua scelta in qualsiasi momento con il pulsante \"Impostazioni privacy\" nel menu principale.",
+  "optout": "Puoi anche disattivare gli annunci personalizzati sul dispositivo: su Android, Impostazioni → Google → Annunci; su iOS, Impostazioni → Privacy e sicurezza → Tracciamento.",
+  "h_local": "Dati salvati sul dispositivo",
+  "local": "La lingua scelta, l'impostazione audio, i progressi, le stelle e il punteggio vengono salvati solo sul tuo dispositivo. Non vengono mai inviati a noi né a un server e vengono eliminati quando disinstalli l'App.",
+  "h_children": "Privacy dei minori",
+  "children": "L'App non è rivolta a minori di 13 anni e non raccogliamo consapevolmente informazioni personali dai minori. Gli annunci sono pubblicati secondo le norme di Google AdMob. Se ritieni che un minore abbia fornito informazioni personali tramite l'App, contattaci e adotteremo le misure opportune.",
+  "h_changes": "Modifiche a questa informativa",
+  "changes": "Potremmo aggiornare questa informativa di tanto in tanto. Le modifiche saranno pubblicate su questa pagina con una nuova data.",
+  "h_contact": "Contatti",
+  "contact": "Per domande su questa informativa scrivici a: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "pt": {
+  "name": "Português",
+  "title": "Política de privacidade — Slipper Therapy",
+  "date": "Última atualização: 7 de novembro de 2026",
+  "intro": "Esta política de privacidade se aplica ao aplicativo móvel <b>Slipper Therapy</b> (o \"Aplicativo\"), desenvolvido e publicado pela <b>Studio Ekin</b> (\"nós\"). Ao usar o Aplicativo, você concorda com as práticas descritas nesta política.",
+  "h_collect": "Informações que coletamos",
+  "collect": "Não coletamos, armazenamos nem compartilhamos diretamente nenhuma informação pessoal. O Aplicativo não exige cadastro e não pede seu nome, e-mail ou qualquer outro dado pessoal.",
+  "h_ads": "Serviços de terceiros: publicidade",
+  "ads": "O Aplicativo exibe anúncios do <b>Google AdMob</b>, um serviço do Google. O AdMob pode coletar e usar automaticamente alguns dados, incluindo:",
+  "items": [
+   "Identificadores do dispositivo (como o ID de publicidade)",
+   "Endereço IP e localização aproximada",
+   "Informações do dispositivo (modelo, versão do sistema)",
+   "Dados de interação com anúncios (visualizações, cliques)"
+  ],
+  "ads_use": "O Google usa esses dados para exibir e medir anúncios. Saiba mais: <a href=\"https://policies.google.com/privacy\">Política de privacidade do Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Como o Google usa dados de apps parceiros</a>.",
+  "consent": "No Espaço Econômico Europeu, no Reino Unido, na Suíça e em outras regiões onde a lei exige, o Aplicativo pede seu consentimento pelo formulário do Google antes de exibir anúncios personalizados. Você pode mudar sua escolha a qualquer momento no botão \"Configurações de privacidade\" do menu principal.",
+  "optout": "Você também pode desativar anúncios personalizados no dispositivo: no Android, Configurações → Google → Anúncios; no iOS, Ajustes → Privacidade e Segurança → Rastreamento.",
+  "h_local": "Dados armazenados no seu dispositivo",
+  "local": "Sua escolha de idioma, a configuração de som, seu progresso, suas estrelas e sua pontuação são armazenados apenas no seu dispositivo. Nunca são enviados para nós ou para qualquer servidor e são apagados quando você desinstala o Aplicativo.",
+  "h_children": "Privacidade de crianças",
+  "children": "O Aplicativo não é destinado a menores de 13 anos e não coletamos intencionalmente informações pessoais de crianças. Os anúncios são exibidos de acordo com as políticas do Google AdMob. Se você acredita que uma criança forneceu informações pessoais pelo Aplicativo, entre em contato e tomaremos as medidas adequadas.",
+  "h_changes": "Alterações nesta política",
+  "changes": "Podemos atualizar esta política de privacidade periodicamente. As alterações serão publicadas nesta página com uma nova data.",
+  "h_contact": "Contato",
+  "contact": "Se tiver dúvidas sobre esta política de privacidade, fale conosco: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "ru": {
+  "name": "Русский",
+  "title": "Политика конфиденциальности — Slipper Therapy",
+  "date": "Последнее обновление: 7 ноября 2026 г.",
+  "intro": "Настоящая политика конфиденциальности относится к мобильному приложению <b>Slipper Therapy</b> («Приложение»), разработанному и опубликованному <b>Studio Ekin</b> («мы»). Используя Приложение, вы соглашаетесь с описанными здесь правилами.",
+  "h_collect": "Какие данные мы собираем",
+  "collect": "Мы напрямую не собираем, не храним и не передаём никакие персональные данные. Приложение не требует регистрации и не запрашивает ваше имя, адрес электронной почты или другие личные сведения.",
+  "h_ads": "Сторонние сервисы: реклама",
+  "ads": "Приложение показывает рекламу <b>Google AdMob</b> — сервиса Google. AdMob может автоматически собирать и использовать некоторые данные, в том числе:",
+  "items": [
+   "Идентификаторы устройства (например, рекламный идентификатор)",
+   "IP-адрес и примерное местоположение",
+   "Сведения об устройстве (модель, версия ОС)",
+   "Данные о взаимодействии с рекламой (показы, нажатия)"
+  ],
+  "ads_use": "Google использует эти данные для показа и оценки рекламы. Подробнее: <a href=\"https://policies.google.com/privacy\">Политика конфиденциальности Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Как Google использует данные из приложений партнёров</a>.",
+  "consent": "В Европейской экономической зоне, Великобритании, Швейцарии и других регионах, где этого требует закон, Приложение запрашивает ваше согласие через форму Google перед показом персонализированной рекламы. Изменить выбор можно в любое время кнопкой «Настройки конфиденциальности» в главном меню.",
+  "optout": "Персонализированную рекламу можно также отключить на устройстве: в Android — Настройки → Google → Реклама; в iOS — Настройки → Конфиденциальность и безопасность → Отслеживание.",
+  "h_local": "Данные на вашем устройстве",
+  "local": "Выбранный язык, настройка звука, прогресс уровней, звёзды и очки хранятся только на вашем устройстве. Они никогда не отправляются нам или на сервер и удаляются при удалении Приложения.",
+  "h_children": "Конфиденциальность детей",
+  "children": "Приложение не предназначено для детей младше 13 лет, и мы сознательно не собираем персональные данные детей. Реклама показывается в соответствии с правилами Google AdMob. Если вы считаете, что ребёнок передал персональные данные через Приложение, свяжитесь с нами, и мы примем меры.",
+  "h_changes": "Изменения политики",
+  "changes": "Мы можем время от времени обновлять эту политику. Изменения публикуются на этой странице с новой датой.",
+  "h_contact": "Связаться с нами",
+  "contact": "Вопросы об этой политике конфиденциальности направляйте по адресу: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "ar": {
+  "name": "العربية",
+  "title": "سياسة الخصوصية — Slipper Therapy",
+  "date": "آخر تحديث: 7 نوفمبر 2026",
+  "intro": "تنطبق سياسة الخصوصية هذه على تطبيق الهاتف المحمول <b>Slipper Therapy</b> (\"التطبيق\") الذي طورته ونشرته <b>Studio Ekin</b> (\"نحن\"). باستخدامك للتطبيق فإنك توافق على الممارسات الموضحة في هذه السياسة.",
+  "h_collect": "المعلومات التي نجمعها",
+  "collect": "لا نجمع أي معلومات شخصية بشكل مباشر ولا نخزنها ولا نشاركها. لا يتطلب التطبيق التسجيل ولا يطلب اسمك أو بريدك الإلكتروني أو أي بيانات شخصية أخرى.",
+  "h_ads": "خدمات الطرف الثالث: الإعلانات",
+  "ads": "يعرض التطبيق إعلانات تقدمها <b>Google AdMob</b>، وهي خدمة من Google. قد تجمع AdMob بعض البيانات وتستخدمها تلقائيًا، ومنها:",
+  "items": [
+   "معرّفات الجهاز (مثل المعرّف الإعلاني)",
+   "عنوان IP والموقع التقريبي",
+   "معلومات الجهاز (الطراز وإصدار نظام التشغيل)",
+   "بيانات التفاعل مع الإعلانات (المشاهدات والنقرات)"
+  ],
+  "ads_use": "تستخدم Google هذه البيانات لعرض الإعلانات وقياسها. لمزيد من المعلومات: <a href=\"https://policies.google.com/privacy\">سياسة خصوصية Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">كيف تستخدم Google البيانات من التطبيقات الشريكة</a>.",
+  "consent": "في المنطقة الاقتصادية الأوروبية والمملكة المتحدة وسويسرا والمناطق الأخرى التي يفرض فيها القانون ذلك، يطلب التطبيق موافقتك عبر نموذج الموافقة من Google قبل عرض الإعلانات المخصّصة. يمكنك تغيير اختيارك في أي وقت من زر \"إعدادات الخصوصية\" في القائمة الرئيسية.",
+  "optout": "يمكنك أيضًا إيقاف الإعلانات المخصّصة على جهازك: في Android عبر الإعدادات ← Google ← الإعلانات، وفي iOS عبر الإعدادات ← الخصوصية والأمان ← التتبع.",
+  "h_local": "البيانات المخزنة على جهازك",
+  "local": "يُحفظ اختيار اللغة وإعداد الصوت وتقدّمك في المراحل ونجومك ونقاطك على جهازك فقط. لا تُرسل إلينا أو إلى أي خادم أبدًا، وتُحذف عند إلغاء تثبيت التطبيق.",
+  "h_children": "خصوصية الأطفال",
+  "children": "التطبيق غير موجّه للأطفال دون 13 عامًا ولا نجمع عن علم معلومات شخصية من الأطفال. تُعرض الإعلانات وفق سياسات Google AdMob. إذا كنت تعتقد أن طفلًا قدّم معلومات شخصية عبر التطبيق، فتواصل معنا وسنتخذ الإجراء المناسب.",
+  "h_changes": "التغييرات على هذه السياسة",
+  "changes": "قد نحدّث سياسة الخصوصية هذه من وقت لآخر. ستُنشر التغييرات في هذه الصفحة مع تاريخ مراجعة جديد.",
+  "h_contact": "اتصل بنا",
+  "contact": "إذا كانت لديك أسئلة حول سياسة الخصوصية هذه، راسلنا على: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "az": {
+  "name": "Azərbaycanca",
+  "title": "Məxfilik Siyasəti — Slipper Therapy",
+  "date": "Son yenilənmə: 7 noyabr 2026",
+  "intro": "Bu məxfilik siyasəti <b>Studio Ekin</b> (\"biz\") tərəfindən hazırlanmış və yayımlanmış <b>Slipper Therapy</b> mobil tətbiqinə (\"Tətbiq\") aiddir. Tətbiqdən istifadə etməklə bu siyasətdə təsvir olunan qaydaları qəbul edirsiniz.",
+  "h_collect": "Topladığımız məlumatlar",
+  "collect": "Biz birbaşa heç bir şəxsi məlumat toplamır, saxlamır və paylaşmırıq. Tətbiq qeydiyyat tələb etmir; adınızı, e-poçt ünvanınızı və ya başqa şəxsi məlumatınızı istəmir.",
+  "h_ads": "Üçüncü tərəf xidmətləri: reklam",
+  "ads": "Tətbiq Google-un xidməti olan <b>Google AdMob</b> tərəfindən təqdim edilən reklamlar göstərir. AdMob bəzi məlumatları avtomatik toplaya və istifadə edə bilər:",
+  "items": [
+   "Cihaz identifikatorları (Reklam ID-si kimi)",
+   "IP ünvanı və təxmini yer",
+   "Cihaz məlumatları (model, əməliyyat sistemi versiyası)",
+   "Reklamla qarşılıqlı əlaqə məlumatları (baxış, klik)"
+  ],
+  "ads_use": "Google bu məlumatlardan reklam göstərmək və ölçmək üçün istifadə edir. Ətraflı: <a href=\"https://policies.google.com/privacy\">Google Məxfilik Siyasəti</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Google tərəfdaş tətbiqlərin məlumatlarından necə istifadə edir</a>.",
+  "consent": "Avropa İqtisadi Zonası, Böyük Britaniya, İsveçrə və qanunun tələb etdiyi digər bölgələrdə Tətbiq fərdiləşdirilmiş reklam göstərmədən əvvəl Google-un razılıq forması ilə icazənizi istəyir. Seçiminizi istənilən vaxt əsas menyudakı \"Məxfilik ayarları\" düyməsi ilə dəyişə bilərsiniz.",
+  "optout": "Fərdiləşdirilmiş reklamları cihazınızda da söndürə bilərsiniz: Android-də Ayarlar → Google → Reklamlar; iOS-da Ayarlar → Məxfilik və Təhlükəsizlik → İzləmə.",
+  "h_local": "Cihazınızda saxlanan məlumatlar",
+  "local": "Dil seçiminiz, səs ayarı, mərhələ irəliləyişiniz, ulduzlarınız və xalınız yalnız cihazınızda saxlanır. Heç vaxt bizə və ya serverə göndərilmir və Tətbiqi sildikdə silinir.",
+  "h_children": "Uşaqların məxfiliyi",
+  "children": "Tətbiq 13 yaşdan kiçik uşaqlar üçün nəzərdə tutulmayıb və biz uşaqlardan bilərəkdən şəxsi məlumat toplamırıq. Reklamlar Google AdMob siyasətlərinə uyğun göstərilir. Bir uşağın Tətbiq vasitəsilə şəxsi məlumat verdiyini düşünürsünüzsə, bizimlə əlaqə saxlayın, lazımi tədbirləri görərik.",
+  "h_changes": "Bu siyasətdə dəyişikliklər",
+  "changes": "Bu məxfilik siyasətini vaxtaşırı yeniləyə bilərik. Dəyişikliklər bu səhifədə yeni tarixlə dərc olunur.",
+  "h_contact": "Bizimlə əlaqə",
+  "contact": "Bu məxfilik siyasəti ilə bağlı suallarınız üçün: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "pl": {
+  "name": "Polski",
+  "title": "Polityka prywatności — Slipper Therapy",
+  "date": "Ostatnia aktualizacja: 7 listopada 2026",
+  "intro": "Niniejsza polityka prywatności dotyczy aplikacji mobilnej <b>Slipper Therapy</b> (\"Aplikacja\"), opracowanej i wydanej przez <b>Studio Ekin</b> (\"my\"). Korzystając z Aplikacji, akceptujesz zasady opisane w tej polityce.",
+  "h_collect": "Jakie informacje zbieramy",
+  "collect": "Nie zbieramy, nie przechowujemy ani nie udostępniamy bezpośrednio żadnych danych osobowych. Aplikacja nie wymaga rejestracji i nie prosi o imię, adres e-mail ani inne dane osobowe.",
+  "h_ads": "Usługi zewnętrzne: reklamy",
+  "ads": "Aplikacja wyświetla reklamy dostarczane przez <b>Google AdMob</b>, usługę firmy Google. AdMob może automatycznie zbierać i wykorzystywać pewne dane, w tym:",
+  "items": [
+   "Identyfikatory urządzenia (np. identyfikator reklamowy)",
+   "Adres IP i przybliżoną lokalizację",
+   "Informacje o urządzeniu (model, wersja systemu)",
+   "Dane o interakcji z reklamami (wyświetlenia, kliknięcia)"
+  ],
+  "ads_use": "Google wykorzystuje te dane do wyświetlania i mierzenia reklam. Więcej: <a href=\"https://policies.google.com/privacy\">Polityka prywatności Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Jak Google wykorzystuje dane z aplikacji partnerów</a>.",
+  "consent": "W Europejskim Obszarze Gospodarczym, Wielkiej Brytanii, Szwajcarii i innych regionach, w których wymaga tego prawo, Aplikacja prosi o zgodę za pomocą formularza Google przed wyświetleniem reklam spersonalizowanych. Swój wybór możesz w każdej chwili zmienić przyciskiem \"Ustawienia prywatności\" w menu głównym.",
+  "optout": "Reklamy spersonalizowane możesz też wyłączyć na urządzeniu: na Androidzie Ustawienia → Google → Reklamy; na iOS Ustawienia → Prywatność i ochrona → Śledzenie.",
+  "h_local": "Dane zapisane na urządzeniu",
+  "local": "Wybrany język, ustawienie dźwięku, postęp poziomów, gwiazdki i wynik są zapisywane wyłącznie na Twoim urządzeniu. Nigdy nie są wysyłane do nas ani na żaden serwer i zostają usunięte po odinstalowaniu Aplikacji.",
+  "h_children": "Prywatność dzieci",
+  "children": "Aplikacja nie jest skierowana do dzieci poniżej 13 roku życia i świadomie nie zbieramy danych osobowych dzieci. Reklamy są wyświetlane zgodnie z zasadami Google AdMob. Jeśli uważasz, że dziecko przekazało dane osobowe przez Aplikację, skontaktuj się z nami, a podejmiemy odpowiednie działania.",
+  "h_changes": "Zmiany w polityce",
+  "changes": "Możemy od czasu do czasu aktualizować tę politykę prywatności. Zmiany zostaną opublikowane na tej stronie z nową datą.",
+  "h_contact": "Kontakt",
+  "contact": "W razie pytań dotyczących tej polityki prywatności napisz do nas: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "nl": {
+  "name": "Nederlands",
+  "title": "Privacybeleid — Slipper Therapy",
+  "date": "Laatst bijgewerkt: 7 november 2026",
+  "intro": "Dit privacybeleid is van toepassing op de mobiele app <b>Slipper Therapy</b> (de \"App\"), ontwikkeld en uitgegeven door <b>Studio Ekin</b> (\"wij\"). Door de App te gebruiken, gaat u akkoord met de hier beschreven werkwijze.",
+  "h_collect": "Welke gegevens we verzamelen",
+  "collect": "We verzamelen, bewaren of delen rechtstreeks geen persoonsgegevens. De App vereist geen registratie en vraagt niet om uw naam, e-mailadres of andere persoonlijke gegevens.",
+  "h_ads": "Diensten van derden: advertenties",
+  "ads": "De App toont advertenties van <b>Google AdMob</b>, een dienst van Google. AdMob kan automatisch bepaalde gegevens verzamelen en gebruiken, waaronder:",
+  "items": [
+   "Apparaat-ID's (zoals de advertentie-ID)",
+   "IP-adres en globale locatie",
+   "Apparaatgegevens (model, versie van het besturingssysteem)",
+   "Gegevens over interactie met advertenties (weergaven, klikken)"
+  ],
+  "ads_use": "Google gebruikt deze gegevens om advertenties te tonen en te meten. Meer informatie: <a href=\"https://policies.google.com/privacy\">Privacybeleid van Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Hoe Google gegevens van partnerapps gebruikt</a>.",
+  "consent": "In de Europese Economische Ruimte, het Verenigd Koninkrijk, Zwitserland en andere regio's waar de wet dit vereist, vraagt de App via het toestemmingsformulier van Google om uw toestemming voordat gepersonaliseerde advertenties worden getoond. U kunt uw keuze op elk moment wijzigen met de knop \"Privacy-instellingen\" in het hoofdmenu.",
+  "optout": "U kunt gepersonaliseerde advertenties ook op uw apparaat uitschakelen: op Android via Instellingen → Google → Advertenties; op iOS via Instellingen → Privacy en beveiliging → Tracking.",
+  "h_local": "Gegevens op uw apparaat",
+  "local": "Uw taalkeuze, geluidsinstelling, voortgang, sterren en score worden alleen op uw apparaat opgeslagen. Ze worden nooit naar ons of naar een server gestuurd en worden verwijderd wanneer u de App verwijdert.",
+  "h_children": "Privacy van kinderen",
+  "children": "De App is niet bedoeld voor kinderen jonger dan 13 jaar en we verzamelen niet bewust persoonsgegevens van kinderen. Advertenties worden getoond volgens het beleid van Google AdMob. Denkt u dat een kind via de App persoonsgegevens heeft verstrekt, neem dan contact met ons op; we nemen passende maatregelen.",
+  "h_changes": "Wijzigingen in dit beleid",
+  "changes": "We kunnen dit privacybeleid van tijd tot tijd bijwerken. Wijzigingen worden op deze pagina gepubliceerd met een nieuwe datum.",
+  "h_contact": "Contact",
+  "contact": "Vragen over dit privacybeleid? Mail ons: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "id": {
+  "name": "Bahasa Indonesia",
+  "title": "Kebijakan Privasi — Slipper Therapy",
+  "date": "Terakhir diperbarui: 7 November 2026",
+  "intro": "Kebijakan privasi ini berlaku untuk aplikasi seluler <b>Slipper Therapy</b> (\"Aplikasi\"), yang dikembangkan dan diterbitkan oleh <b>Studio Ekin</b> (\"kami\"). Dengan menggunakan Aplikasi, Anda menyetujui praktik yang dijelaskan dalam kebijakan ini.",
+  "h_collect": "Informasi yang Kami Kumpulkan",
+  "collect": "Kami tidak mengumpulkan, menyimpan, atau membagikan informasi pribadi apa pun secara langsung. Aplikasi tidak memerlukan pendaftaran dan tidak meminta nama, alamat email, atau data pribadi lainnya.",
+  "h_ads": "Layanan Pihak Ketiga: Iklan",
+  "ads": "Aplikasi menampilkan iklan yang disajikan oleh <b>Google AdMob</b>, layanan dari Google. AdMob dapat secara otomatis mengumpulkan dan menggunakan data tertentu, termasuk:",
+  "items": [
+   "Pengenal perangkat (seperti ID Iklan)",
+   "Alamat IP dan perkiraan lokasi",
+   "Informasi perangkat (model, versi sistem operasi)",
+   "Data interaksi iklan (tayangan, klik)"
+  ],
+  "ads_use": "Google menggunakan data ini untuk menampilkan dan mengukur iklan. Selengkapnya: <a href=\"https://policies.google.com/privacy\">Kebijakan Privasi Google</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Cara Google menggunakan data dari aplikasi mitra</a>.",
+  "consent": "Di Wilayah Ekonomi Eropa, Inggris, Swiss, dan wilayah lain yang diwajibkan oleh hukum, Aplikasi meminta persetujuan Anda melalui formulir persetujuan Google sebelum menampilkan iklan yang dipersonalisasi. Anda dapat mengubah pilihan kapan saja melalui tombol \"Pengaturan privasi\" di menu utama.",
+  "optout": "Anda juga dapat menonaktifkan iklan yang dipersonalisasi di perangkat: di Android, Setelan → Google → Iklan; di iOS, Pengaturan → Privasi & Keamanan → Pelacakan.",
+  "h_local": "Data yang Disimpan di Perangkat Anda",
+  "local": "Pilihan bahasa, pengaturan suara, kemajuan level, bintang, dan skor Anda hanya disimpan di perangkat Anda. Data ini tidak pernah dikirim ke kami atau ke server mana pun dan akan dihapus saat Anda mencopot Aplikasi.",
+  "h_children": "Privasi Anak",
+  "children": "Aplikasi tidak ditujukan untuk anak di bawah 13 tahun, dan kami tidak dengan sengaja mengumpulkan informasi pribadi dari anak-anak. Iklan ditayangkan sesuai kebijakan Google AdMob. Jika Anda yakin seorang anak telah memberikan informasi pribadi melalui Aplikasi, hubungi kami dan kami akan mengambil tindakan yang sesuai.",
+  "h_changes": "Perubahan Kebijakan Ini",
+  "changes": "Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Perubahan akan dipublikasikan di halaman ini dengan tanggal revisi baru.",
+  "h_contact": "Hubungi Kami",
+  "contact": "Jika Anda memiliki pertanyaan tentang kebijakan privasi ini, hubungi kami di: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "ja": {
+  "name": "日本語",
+  "title": "プライバシーポリシー — Slipper Therapy",
+  "date": "最終更新日：2026年11月7日",
+  "intro": "本プライバシーポリシーは、<b>Studio Ekin</b>（以下「当社」）が開発・公開するモバイルアプリ<b>Slipper Therapy</b>（以下「本アプリ」）に適用されます。本アプリを使用することで、本ポリシーに記載された取り扱いに同意したものとみなされます。",
+  "h_collect": "収集する情報",
+  "collect": "当社は個人情報を直接収集、保存、共有することはありません。本アプリは登録不要で、お名前、メールアドレス、その他の個人情報を求めません。",
+  "h_ads": "第三者サービス：広告",
+  "ads": "本アプリは、Googleのサービスである<b>Google AdMob</b>の広告を表示します。AdMobは次のようなデータを自動的に収集・使用する場合があります。",
+  "items": [
+   "デバイス識別子（広告IDなど）",
+   "IPアドレスとおおよその位置情報",
+   "デバイス情報（機種、OSバージョン）",
+   "広告とのやり取りのデータ（表示、クリック）"
+  ],
+  "ads_use": "Googleはこれらのデータを広告の表示と測定に使用します。詳細：<a href=\"https://policies.google.com/privacy\">Googleプライバシーポリシー</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Googleによるパートナーアプリのデータの使用方法</a>。",
+  "consent": "欧州経済領域、英国、スイス、その他法律で求められる地域では、パーソナライズ広告を表示する前に、Googleの同意フォームで同意を求めます。選択はメインメニューの「プライバシー設定」ボタンからいつでも変更できます。",
+  "optout": "パーソナライズ広告はデバイスでもオフにできます。Android：設定 → Google → 広告、iOS：設定 → プライバシーとセキュリティ → トラッキング。",
+  "h_local": "デバイスに保存されるデータ",
+  "local": "言語の選択、サウンド設定、ステージの進行状況、星とスコアはお使いのデバイスにのみ保存されます。当社やサーバーへ送信されることはなく、本アプリを削除すると消去されます。",
+  "h_children": "子どものプライバシー",
+  "children": "本アプリは13歳未満の子どもを対象としておらず、当社が子どもから個人情報を意図的に収集することはありません。広告はGoogle AdMobのポリシーに従って配信されます。子どもが本アプリを通じて個人情報を提供したと思われる場合はご連絡ください。適切に対応します。",
+  "h_changes": "本ポリシーの変更",
+  "changes": "本ポリシーは随時更新されることがあります。変更は新しい日付とともにこのページに掲載されます。",
+  "h_contact": "お問い合わせ",
+  "contact": "本プライバシーポリシーに関するご質問は次までご連絡ください：<a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ },
+ "ko": {
+  "name": "한국어",
+  "title": "개인정보 처리방침 — Slipper Therapy",
+  "date": "최종 업데이트: 2026년 11월 7일",
+  "intro": "본 개인정보 처리방침은 <b>Studio Ekin</b>(\"당사\")이 개발 및 배포하는 모바일 앱 <b>Slipper Therapy</b>(\"앱\")에 적용됩니다. 앱을 사용하면 본 방침에 설명된 내용에 동의하는 것으로 간주됩니다.",
+  "h_collect": "수집하는 정보",
+  "collect": "당사는 개인정보를 직접 수집, 저장 또는 공유하지 않습니다. 앱은 회원가입이 필요 없으며 이름, 이메일 주소 등 개인 정보를 요구하지 않습니다.",
+  "h_ads": "제3자 서비스: 광고",
+  "ads": "앱은 Google이 제공하는 <b>Google AdMob</b>의 광고를 표시합니다. AdMob은 다음과 같은 일부 데이터를 자동으로 수집하고 사용할 수 있습니다:",
+  "items": [
+   "기기 식별자(광고 ID 등)",
+   "IP 주소 및 대략적인 위치",
+   "기기 정보(모델, 운영체제 버전)",
+   "광고 상호작용 데이터(노출, 클릭)"
+  ],
+  "ads_use": "Google은 이 데이터를 광고 게재 및 측정에 사용합니다. 자세히 보기: <a href=\"https://policies.google.com/privacy\">Google 개인정보처리방침</a> · <a href=\"https://policies.google.com/technologies/partner-sites\">Google이 파트너 앱의 데이터를 사용하는 방법</a>.",
+  "consent": "유럽 경제 지역, 영국, 스위스 및 법률이 요구하는 기타 지역에서는 맞춤형 광고를 표시하기 전에 Google 동의 양식을 통해 동의를 요청합니다. 선택은 메인 메뉴의 \"개인정보 설정\" 버튼에서 언제든지 변경할 수 있습니다.",
+  "optout": "기기에서 맞춤형 광고를 끌 수도 있습니다: Android는 설정 → Google → 광고, iOS는 설정 → 개인정보 보호 및 보안 → 추적.",
+  "h_local": "기기에 저장되는 데이터",
+  "local": "언어 선택, 소리 설정, 스테이지 진행 상황, 별과 점수는 기기에만 저장됩니다. 당사나 어떤 서버로도 전송되지 않으며 앱을 삭제하면 함께 삭제됩니다.",
+  "h_children": "아동의 개인정보",
+  "children": "앱은 13세 미만 아동을 대상으로 하지 않으며, 당사는 아동의 개인정보를 고의로 수집하지 않습니다. 광고는 Google AdMob 정책에 따라 게재됩니다. 아동이 앱을 통해 개인정보를 제공했다고 생각되면 당사에 연락해 주세요. 적절한 조치를 취하겠습니다.",
+  "h_changes": "방침의 변경",
+  "changes": "당사는 본 개인정보 처리방침을 수시로 업데이트할 수 있습니다. 변경 사항은 새 개정일과 함께 이 페이지에 게시됩니다.",
+  "h_contact": "문의하기",
+  "contact": "본 개인정보 처리방침에 관한 문의는 다음으로 연락해 주세요: <a href=\"mailto:fadiyezz@gmail.com\">fadiyezz@gmail.com</a>"
+ }
+};
+function show(k) {
+  const t = L[k];
+  document.documentElement.lang = k;
+  document.documentElement.dir = k === "ar" ? "rtl" : "ltr";
+  document.title = t.title;
+  document.getElementById("t-title").textContent = t.title;
+  document.getElementById("t-date").textContent = t.date;
+  const sec = (h, ...ps) => `<h2>${h}</h2>` + ps.map(p => p.startsWith("<ul>") ? p : `<p>${p}</p>`).join("");
+  document.getElementById("content").innerHTML =
+    `<p>${t.intro}</p>` +
+    sec(t.h_collect, t.collect) +
+    sec(t.h_ads, t.ads, "<ul>" + t.items.map(i => `<li>${i}</li>`).join("") + "</ul>", t.ads_use, t.consent, t.optout) +
+    sec(t.h_local, t.local) +
+    sec(t.h_children, t.children) +
+    sec(t.h_changes, t.changes) +
+    sec(t.h_contact, t.contact);
+}
+const sel = document.getElementById("lang");
+sel.innerHTML = Object.entries(L).map(([k, v]) => `<option value="${k}">${v.name}</option>`).join("");
+// ?lang=xx, sonra tarayıcı dili, sonra İngilizce.
+const want = new URLSearchParams(location.search).get("lang") || (navigator.language || "en").slice(0, 2).toLowerCase();
+const start = L[want] ? want : "en";
+sel.value = start;
+sel.onchange = () => show(sel.value);
+show(start);
+</script>
+</body>
+</html>
